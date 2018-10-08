@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailCalActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_b1">
+
+
+        <ImageView
+            android:id="@+id/bt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_back" />
+
+
+        <ImageView
+            android:id="@+id/bt_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_create" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_cal"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/rl_header"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/bt_cal_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_left" />
+
+        <TextView
+            android:id="@+id/tv_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/bt_cal_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_right" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ll_cal"
+        android:background="@color/gray" />
+
+    <ListView
+        android:id="@+id/lv_cal_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line" />
+
+
+</RelativeLayout>

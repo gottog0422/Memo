@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Simple MEMO</string>
+    <string name="memo_tab">Memo</string>
+    <string name="calendar_tab">Calendar</string>
+
+    <string name="input_title">input title</string>
+    <string name="input_content">input content</string>
+
+    <string name="no_title">no title</string>
+
+    <string name="modify">modify</string>
+    <string name="delete">delete</string>
+    <string name="share">share</string>
+    <string name="copy">text copy</string>
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
+
+    <string name="sort_1">title Ascending</string>
+    <string name="sort_2">title Descending</string>
+    <string name="sort_3">date Ascending</string>
+    <string name="sort_4">date Descending</string>
+
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+
+    <string name="do_del"></string>
+    <string name="suc_copy">copy complete</string>
+</resources>

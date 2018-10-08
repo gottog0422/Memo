@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#a0d2ff</color>
+
+    <color name="text_w">#ffffff</color>
+    <color name="text_b">#000000</color>
+    <color name="gray">#44adadad</color>
+    <color name="color_b1">#529adb</color>
+
+    <drawable name="depress_bt">#00000000</drawable>
+    <drawable name="press_bt">#d3d3d3</drawable>
+</resources>

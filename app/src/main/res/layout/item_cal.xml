@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rl"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+
+    <ImageView
+        android:id="@+id/iv_calitem_check"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_calitem_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="dd"
+        android:textSize="20dp" />
+
+</RelativeLayout>
