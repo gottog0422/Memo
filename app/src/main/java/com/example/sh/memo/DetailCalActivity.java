@@ -167,7 +167,7 @@ public class DetailCalActivity extends AppCompatActivity {
         Integer id = item.getId();
 
         intent.putExtra("id", id);
-
+//
         startActivityForResult(intent, 0);
         overridePendingTransition(R.anim.anim_right_in, R.anim.anim_not_move);
     }
