@@ -1,15 +1,25 @@
 package com.example.sh.memo;
 
 import android.app.DatePickerDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sh.memo.adapter.MemoAdapter;
+import com.example.sh.memo.customDialog.Dialog_LongClick;
 import com.example.sh.memo.data.MemoData;
 import com.example.sh.memo.db.DBManager;
 
@@ -20,6 +30,8 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 public class DetailCalActivity extends AppCompatActivity {
     @BindView(R.id.bt_back)
@@ -147,4 +159,81 @@ public class DetailCalActivity extends AppCompatActivity {
         super.onDestroy();
         dbManager.close();
     }
+
+    @OnItemClick(R.id.lv_cal_detail)
+    public void item_click(AdapterView<?> parent, int i) {
+        MemoData item = items.get(i);
+        Intent intent = new Intent(DetailCalActivity.this, DetailMemoActivity.class);
+        Integer id = item.getId();
+
+        intent.putExtra("id", id);
+
+        startActivityForResult(intent, 0);
+        overridePendingTransition(R.anim.anim_right_in, R.anim.anim_not_move);
+    }
+
+    @OnItemLongClick(R.id.lv_cal_detail)
+    public boolean item_long_Click(AdapterView<?> parent, int i) {
+        set_dialog(i);
+        return true;
+    }
+
+
+    public void set_dialog(final int position) {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        int w = dm.widthPixels;
+
+        final Dialog_LongClick dialog_longClick = new Dialog_LongClick(this);
+
+        dialog_longClick.setCallBack(new Dialog_LongClick.CallBack() {
+            @Override
+            public void bt_modify() {
+                dialog_longClick.dismiss();
+                Intent intent = new Intent(DetailCalActivity.this, AddMemoActivity.class);
+                intent.putExtra("id", items.get(position).getId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void bt_delete() {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                alertDialog.setTitle("경고");
+                alertDialog.setMessage("정말 삭제하시겠습니까?");
+                alertDialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dbManager.delet_Memo(items.get(position).getId());
+                        set_date();
+                    }
+                });
+                alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dialog_longClick.dismiss();
+                alertDialog.show();
+            }
+
+            @Override
+            public void bt_share() {
+                String str = items.get(position).getTitle() + "\n" + items.get(position).getContent();
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("memo", str); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                clipboardManager.setPrimaryClip(clipData);
+
+                Toast.makeText(getApplicationContext(), getText(R.string.suc_copy), Toast.LENGTH_SHORT).show();
+
+                dialog_longClick.dismiss();
+            }
+        });
+
+        WindowManager.LayoutParams wm = dialog_longClick.getWindow().getAttributes();
+        wm.copyFrom(dialog_longClick.getWindow().getAttributes());
+        wm.width = w - (w / 4);
+
+        dialog_longClick.show();
+    }
+
 }
